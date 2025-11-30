@@ -70,7 +70,8 @@
           "value": {
             "done": false,
             "title": "={{$json[\"body\"][\"title\"]}}",
-            "description": "={{$json[\"body\"][\"description\"]}}"
+            "description": "={{$json[\"body\"][\"description\"]}}",
+            "id": "={{$json[\"body\"][\"id\"]}}"
           },
           "matchingColumns": [
             "id"
@@ -84,7 +85,7 @@
               "display": true,
               "type": "number",
               "canBeUsedToMatch": true,
-              "removed": true
+              "removed": false
             },
             {
               "id": "title",
@@ -169,26 +170,6 @@
     },
     {
       "parameters": {
-        "values": {
-          "string": [
-            {
-              "name": "success",
-              "value": "Task created successfully"
-            }
-          ]
-        }
-      },
-      "type": "n8n-nodes-base.set",
-      "typeVersion": 2,
-      "position": [
-        80,
-        288
-      ],
-      "id": "set-success-response",
-      "name": "Set Success Response"
-    },
-    {
-      "parameters": {
         "options": {
           "responseCode": 200
         }
@@ -201,6 +182,29 @@
       ],
       "id": "b937cb0b-9a6b-4e67-8f1d-edb4fce255b5",
       "name": "Respond to Webhook"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "4f364da5-1fa9-4ae0-89b9-04c864502159",
+              "name": "result",
+              "value": "done",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        352,
+        288
+      ],
+      "id": "17b8adb0-87ee-48d8-9c58-6a66640de419",
+      "name": "Edit Fields"
     }
   ],
   "pinData": {},
@@ -249,18 +253,18 @@
       "main": [
         [
           {
-            "node": "Set Success Response",
+            "node": "Respond to Webhook",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Set Success Response": {
+    "Respond to Webhook": {
       "main": [
         [
           {
-            "node": "Respond to Webhook",
+            "node": "Edit Fields",
             "type": "main",
             "index": 0
           }
@@ -272,7 +276,7 @@
   "settings": {
     "executionOrder": "v1"
   },
-  "versionId": "28250b7b-9d9e-43f9-ad7b-1dc84aa4d02d",
+  "versionId": "43fcfb45-9320-49bc-a75c-b89d33183820",
   "meta": {
     "templateCredsSetupCompleted": true,
     "instanceId": "3ce1c7df197e6c978abd30e532de1d28668f15284ecba18a25b2a581d3967ad8"
