@@ -1,0 +1,251 @@
+{
+  "name": "Create Task (Webhook API)",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "tasks",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        -736,
+        416
+      ],
+      "id": "ff733f6a-6941-4001-a420-21b52c065a1e",
+      "name": "Webhook",
+      "webhookId": "51dedb6d-95e0-42c3-8a3c-26606afa8734"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "da05adea-54ac-4761-a9f5-bcb6310ad5ea",
+              "leftValue": "={{ $json.body.title }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "or"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        -528,
+        416
+      ],
+      "id": "b00533f1-0377-4bf4-8ba4-9ba41b1eb1cb",
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "schema": {
+          "__rl": true,
+          "mode": "list",
+          "value": "public"
+        },
+        "table": {
+          "__rl": true,
+          "value": "task",
+          "mode": "list",
+          "cachedResultName": "task"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "done": false,
+            "title": "={{$json[\"body\"][\"title\"]}}",
+            "description": "={{$json[\"body\"][\"description\"]}}"
+          },
+          "matchingColumns": [
+            "id"
+          ],
+          "schema": [
+            {
+              "id": "id",
+              "displayName": "id",
+              "required": false,
+              "defaultMatch": true,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "title",
+              "displayName": "title",
+              "required": true,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "description",
+              "displayName": "description",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "done",
+              "displayName": "done",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "boolean",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        -240,
+        288
+      ],
+      "id": "6de62c53-b5d8-4cbe-845d-d51a66ec6a21",
+      "name": "Insert rows in a table",
+      "credentials": {
+        "postgres": {
+          "id": "0VmaM3xLbzVrdhTY",
+          "name": "Postgres account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "queue": "task_created",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.rabbitmq",
+      "typeVersion": 1.1,
+      "position": [
+        -32,
+        288
+      ],
+      "id": "e0eb850d-a11c-47e3-9933-a9ef462b9df9",
+      "name": "RabbitMQ",
+      "credentials": {
+        "rabbitmq": {
+          "id": "KOdVtt7VVYl59dK7",
+          "name": "RabbitMQ account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "errorMessage": "\"Missing field: title\""
+      },
+      "type": "n8n-nodes-base.stopAndError",
+      "typeVersion": 1,
+      "position": [
+        -320,
+        512
+      ],
+      "id": "7eda137d-73fb-4e53-9235-b45a87256aab",
+      "name": "Stop and Error"
+    },
+    {
+      "parameters": {
+        "options": {
+          "responseCode": 200
+        }
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.4,
+      "position": [
+        176,
+        288
+      ],
+      "id": "b937cb0b-9a6b-4e67-8f1d-edb4fce255b5",
+      "name": "Respond to Webhook"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "Insert rows in a table",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Stop and Error",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Insert rows in a table": {
+      "main": [
+        [
+          {
+            "node": "RabbitMQ",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "RabbitMQ": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "28250b7b-9d9e-43f9-ad7b-1dc84aa4d02d",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "3ce1c7df197e6c978abd30e532de1d28668f15284ecba18a25b2a581d3967ad8"
+  },
+  "id": "5QYa67QYs045Z8pI",
+  "tags": []
+}
