@@ -182,6 +182,29 @@
       ],
       "id": "b937cb0b-9a6b-4e67-8f1d-edb4fce255b5",
       "name": "Respond to Webhook"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "4f364da5-1fa9-4ae0-89b9-04c864502159",
+              "name": "result",
+              "value": "done",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        352,
+        288
+      ],
+      "id": "17b8adb0-87ee-48d8-9c58-6a66640de419",
+      "name": "Edit Fields"
     }
   ],
   "pinData": {},
@@ -239,7 +262,13 @@
     },
     "Respond to Webhook": {
       "main": [
-        []
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
       ]
     }
   },
@@ -247,7 +276,7 @@
   "settings": {
     "executionOrder": "v1"
   },
-  "versionId": "bf2ddfd5-c8f3-4308-a301-b6f4e13a604e",
+  "versionId": "43fcfb45-9320-49bc-a75c-b89d33183820",
   "meta": {
     "templateCredsSetupCompleted": true,
     "instanceId": "3ce1c7df197e6c978abd30e532de1d28668f15284ecba18a25b2a581d3967ad8"
