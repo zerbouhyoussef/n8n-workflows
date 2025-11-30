@@ -169,6 +169,26 @@
     },
     {
       "parameters": {
+        "values": {
+          "string": [
+            {
+              "name": "success",
+              "value": "Task created successfully"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 2,
+      "position": [
+        80,
+        288
+      ],
+      "id": "set-success-response",
+      "name": "Set Success Response"
+    },
+    {
+      "parameters": {
         "options": {
           "responseCode": 200
         }
@@ -226,6 +246,17 @@
       ]
     },
     "RabbitMQ": {
+      "main": [
+        [
+          {
+            "node": "Set Success Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set Success Response": {
       "main": [
         [
           {

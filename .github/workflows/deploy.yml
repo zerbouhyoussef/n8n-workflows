@@ -5,7 +5,7 @@ on:
     branches:
       - main
     paths:
-      - 'workflow.json' # Only runs if the workflow file changes
+      - 'workflow.json' 
 
 jobs:
   deploy:
