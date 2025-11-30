@@ -3,7 +3,7 @@ name: Deploy n8n Workflow
 on:
   push:
     branches:
-      - main
+      - master
     paths:
       - 'workflow.json' 
 
