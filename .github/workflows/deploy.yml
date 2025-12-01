@@ -29,4 +29,4 @@ jobs:
           N8N_API_KEY: ${{ secrets.N8N_PROD_API_KEY }}
         run: |
           echo "Deploying workflow via n8n CLI..."
-          n8n import:workflow --input=workflow.json --id=5QYa67QYs045Z8pI
+          n8n import:workflow --input=workflow.json --workflowId=5QYa67QYs045Z8pI
