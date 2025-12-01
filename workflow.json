@@ -70,8 +70,7 @@
           "value": {
             "done": false,
             "title": "={{$json[\"body\"][\"title\"]}}",
-            "description": "={{$json[\"body\"][\"description\"]}}",
-            "id": "={{$json[\"body\"][\"id\"]}}"
+            "description": "={{$json[\"body\"][\"description\"]}}"
           },
           "matchingColumns": [
             "id"
@@ -85,7 +84,7 @@
               "display": true,
               "type": "number",
               "canBeUsedToMatch": true,
-              "removed": false
+              "removed": true
             },
             {
               "id": "title",
@@ -123,7 +122,7 @@
       "type": "n8n-nodes-base.postgres",
       "typeVersion": 2.6,
       "position": [
-        -32,
+        -240,
         288
       ],
       "id": "6de62c53-b5d8-4cbe-845d-d51a66ec6a21",
@@ -143,7 +142,7 @@
       "type": "n8n-nodes-base.rabbitmq",
       "typeVersion": 1.1,
       "position": [
-        176,
+        -32,
         288
       ],
       "id": "e0eb850d-a11c-47e3-9933-a9ef462b9df9",
@@ -162,7 +161,7 @@
       "type": "n8n-nodes-base.stopAndError",
       "typeVersion": 1,
       "position": [
-        -112,
+        -320,
         512
       ],
       "id": "7eda137d-73fb-4e53-9235-b45a87256aab",
@@ -177,34 +176,11 @@
       "type": "n8n-nodes-base.respondToWebhook",
       "typeVersion": 1.4,
       "position": [
-        384,
+        176,
         288
       ],
       "id": "b937cb0b-9a6b-4e67-8f1d-edb4fce255b5",
       "name": "Respond to Webhook"
-    },
-    {
-      "parameters": {
-        "assignments": {
-          "assignments": [
-            {
-              "id": "1d398903-2285-4183-bda3-e6f6784db05f",
-              "name": "test",
-              "value": "test",
-              "type": "string"
-            }
-          ]
-        },
-        "options": {}
-      },
-      "type": "n8n-nodes-base.set",
-      "typeVersion": 3.4,
-      "position": [
-        -320,
-        320
-      ],
-      "id": "719ccbdf-9eac-4cbe-afb6-5dd5fa40f117",
-      "name": "Edit Fields"
     }
   ],
   "pinData": {},
@@ -224,7 +200,7 @@
       "main": [
         [
           {
-            "node": "Edit Fields",
+            "node": "Insert rows in a table",
             "type": "main",
             "index": 0
           }
@@ -259,29 +235,13 @@
           }
         ]
       ]
-    },
-    "Respond to Webhook": {
-      "main": [
-        []
-      ]
-    },
-    "Edit Fields": {
-      "main": [
-        [
-          {
-            "node": "Insert rows in a table",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
     }
   },
   "active": true,
   "settings": {
     "executionOrder": "v1"
   },
-  "versionId": "bf2ddfd5-c8f3-4308-a301-b6f4e13a604e",
+  "versionId": "28250b7b-9d9e-43f9-ad7b-1dc84aa4d02d",
   "meta": {
     "templateCredsSetupCompleted": true,
     "instanceId": "3ce1c7df197e6c978abd30e532de1d28668f15284ecba18a25b2a581d3967ad8"
