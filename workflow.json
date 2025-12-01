@@ -123,7 +123,7 @@
       "type": "n8n-nodes-base.postgres",
       "typeVersion": 2.6,
       "position": [
-        -240,
+        -32,
         288
       ],
       "id": "6de62c53-b5d8-4cbe-845d-d51a66ec6a21",
@@ -143,7 +143,7 @@
       "type": "n8n-nodes-base.rabbitmq",
       "typeVersion": 1.1,
       "position": [
-        -32,
+        176,
         288
       ],
       "id": "e0eb850d-a11c-47e3-9933-a9ef462b9df9",
@@ -162,7 +162,7 @@
       "type": "n8n-nodes-base.stopAndError",
       "typeVersion": 1,
       "position": [
-        -320,
+        -112,
         512
       ],
       "id": "7eda137d-73fb-4e53-9235-b45a87256aab",
@@ -177,7 +177,7 @@
       "type": "n8n-nodes-base.respondToWebhook",
       "typeVersion": 1.4,
       "position": [
-        176,
+        384,
         288
       ],
       "id": "b937cb0b-9a6b-4e67-8f1d-edb4fce255b5",
@@ -188,9 +188,9 @@
         "assignments": {
           "assignments": [
             {
-              "id": "4f364da5-1fa9-4ae0-89b9-04c864502159",
-              "name": "result",
-              "value": "done",
+              "id": "1d398903-2285-4183-bda3-e6f6784db05f",
+              "name": "test",
+              "value": "test",
               "type": "string"
             }
           ]
@@ -200,10 +200,10 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        352,
-        288
+        -320,
+        320
       ],
-      "id": "17b8adb0-87ee-48d8-9c58-6a66640de419",
+      "id": "719ccbdf-9eac-4cbe-afb6-5dd5fa40f117",
       "name": "Edit Fields"
     }
   ],
@@ -224,7 +224,7 @@
       "main": [
         [
           {
-            "node": "Insert rows in a table",
+            "node": "Edit Fields",
             "type": "main",
             "index": 0
           }
@@ -262,9 +262,14 @@
     },
     "Respond to Webhook": {
       "main": [
+        []
+      ]
+    },
+    "Edit Fields": {
+      "main": [
         [
           {
-            "node": "Edit Fields",
+            "node": "Insert rows in a table",
             "type": "main",
             "index": 0
           }
@@ -276,7 +281,7 @@
   "settings": {
     "executionOrder": "v1"
   },
-  "versionId": "43fcfb45-9320-49bc-a75c-b89d33183820",
+  "versionId": "bf2ddfd5-c8f3-4308-a301-b6f4e13a604e",
   "meta": {
     "templateCredsSetupCompleted": true,
     "instanceId": "3ce1c7df197e6c978abd30e532de1d28668f15284ecba18a25b2a581d3967ad8"
