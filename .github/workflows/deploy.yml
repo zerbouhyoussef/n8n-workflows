@@ -1,4 +1,4 @@
-name: Deploy n8n Workflow
+name: Deploy n8n Workflow (CLI)
 
 on:
   push:
@@ -15,13 +15,18 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Deploy workflow via API
+      - name: Setup Node.js 16 (required for CLI)
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+
+      - name: Install n8n with CLI support
+        run: npm install -g n8n@0.233.0
+
+      - name: Deploy using n8n CLI
         env:
           N8N_HOST: ${{ secrets.N8N_PROD_HOST }}
           N8N_API_KEY: ${{ secrets.N8N_PROD_API_KEY }}
         run: |
-          echo "Updating workflow via API..."
-          curl -X PATCH "$N8N_HOST/api/v1/workflows/5QYa67QYs045Z8pI" \
-            -H "Content-Type: application/json" \
-            -H "X-N8N-API-KEY: $N8N_API_KEY" \
-            --data "@workflow.json"
+          echo "Deploying workflow via n8n CLI..."
+          n8n import:workflow --input=workflow.json --id=5QYa67QYs045Z8pI
