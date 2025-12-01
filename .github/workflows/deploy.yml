@@ -15,13 +15,13 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Setup Node.js 16 (required for CLI)
+      - name: Setup Node.js (latest LTS)
         uses: actions/setup-node@v3
         with:
-          node-version: '16'
+          node-version: 'lts/*'
 
-      - name: Install n8n with CLI support
-        run: npm install -g n8n@0.233.0
+      - name: Install n8n 
+        run: npm install -g n8n
 
       - name: Deploy using n8n CLI
         env:
@@ -29,4 +29,4 @@ jobs:
           N8N_API_KEY: ${{ secrets.N8N_PROD_API_KEY }}
         run: |
           echo "Deploying workflow via n8n CLI..."
-          n8n import:workflow --input=workflow.json --workflowId=5QYa67QYs045Z8pI
+          n8n import:workflow --input=workflow.json --id=5QYa67QYs045Z8pI
